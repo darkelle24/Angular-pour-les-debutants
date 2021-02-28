@@ -47,11 +47,23 @@ ng serve
 
 Ensuite pour ouvrir votre application dans le navigateur allez à l'addresse <http://localhost:4200/>.
 
+### Conseil
+
+Quand vous copier / transferer une application angular il ne faut pas prendre le dossier node_modules.
+
+Et quand vous recuperer une application angular executez la commande
+
+```sh
+npm install
+```
+
+Cela va vous installez toutes les dépendances. Puis vous pourrez lancez l'application.
+
 ## Angular components
 
 La page que vous voyez est le shell de l'application. Le shell est contrôlé par un Angular components nommé AppComponent.
 
-Les components sont les éléments fondamentaux des applications Angular. Ils affichent des données, écoutent les inputs de l'utilisateur et effectuent des actions en fonction de ces entrées.
+Les components sont les éléments fondamentaux des applications Angular. Ils affichent des données, écoutent les inputs de l'utilisateur et effectuent des actions en fonction de ces inputs.
 
 ### Apportez des modifications à l'application
 
