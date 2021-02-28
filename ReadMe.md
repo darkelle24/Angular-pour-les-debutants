@@ -31,3 +31,34 @@ npm install -g @angular/cli
 À partir de là, la commande ```ng``` est disponible depuis la ligne de commandes.
 
 ## Créez un projet
+
+Maintenant, vous pouvez créer une nouvelle application Angular en exécutant la commande suivante dans votre terminale.
+
+```sh
+ng new first-app
+```
+
+Ensuite, allez dans le répertoire du projet et lancez votre application sur un serveur de développement.
+
+```sh
+cd first-app
+ng serve
+```
+
+Ensuite pour ouvrir votre application dans le navigateur allez à l'addresse <http://localhost:4200/>.
+
+## Angular components
+
+La page que vous voyez est le shell de l'application. Le shell est contrôlé par un Angular components nommé AppComponent.
+
+Les components sont les éléments fondamentaux des applications Angular. Ils affichent des données, écoutent les inputs de l'utilisateur et effectuent des actions en fonction de ces entrées.
+
+### Apportez des modifications à l'application
+
+Ouvrez le projet dans votre éditeur ou IDE préféré et accédez au dossier src / app pour apporter des modifications à l'application de démarrage.
+
+Vous trouverez l'implémentation du shell AppComponent réparti sur trois fichiers:
+
+- app.component.ts - le code du component, écrit en TypeScript.
+- app.component.html - le modèle de component, écrit en HTML.
+- app.component.css: styles CSS privés du component.
