@@ -135,7 +135,9 @@ Afin de lier cette propriété au TypeScript, il faut le mettre entre crochets `
 
 ```typescript
 export class AppComponent {
-  isAuth: boolean = false;
+   constructor() { }
+
+   isAuth: boolean = false;
 }
 ```
 
@@ -148,8 +150,12 @@ export class AppComponent {
 Je vais vous montrer comment réagir dans votre code TypeScript aux événements venant du template HTML grace aux Event binding. on utilise les parenthèses ```()``` pour créer une liaison à un événement.
 
 ```typescript
-click() {
+export class AppComponent {
+  constructor() { }
+
+  click() {
     console.log('Button is pressed!');
+   }
 }
 ```
 
@@ -189,6 +195,8 @@ Pour utilisez le two-way binding il suffit de mettre des crochets et des parenth
 ```typescript
 export class AppComponent {
   name: string = '';
+
+  constructor() { }
 }
 ```
 
