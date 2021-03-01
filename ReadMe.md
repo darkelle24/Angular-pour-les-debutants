@@ -77,7 +77,13 @@ Vous trouverez l'implémentation du shell AppComponent réparti sur trois fichie
 
 ## Afficher une variable
 
-Pour afficher une variable sur le site web. Il suffit de taper ```{{ leNomDeLaVariable }}``` entre les balises d'un code html. Ex: ```<h1>{{title}}</h1>``` va afficher le contenu de la variable title.
+Pour afficher une variable sur le site web. Il suffit de taper ```{{ leNomDeLaVariable }}``` entre les balises d'un code html. Ex:
+
+```html
+<h1>{{title}}</h1>
+```
+
+va afficher le contenu de la variable title.
 
 ## Créez un component
 
@@ -221,6 +227,73 @@ Ce décorateur, en effet, crée une propriété ```heroesName``` qu'on peut fixe
 <app-heroes heroesName="Hulk"></app-heroes>
 ```
 
-## Les directives: *ngIf
+## Les directives
 
+Les directives sont des instructions intégrées dans le DOM que vous utiliserez presque systématiquement quand vous créerez des applications Angular.
 
+Quand Angular lit votre template et rencontre une directive qu'il reconnait, il suit les instructions correspondantes.  Vous pouvez créer vos propres directives
+
+### Les directives: *ngIf
+
+Un component auquel on ajoute la directive ```*ngIf="condition"``` ne s'affichera que si la condition est vrai, comme un ```if``` classique.
+
+```html
+<div *ngIf="show === true">
+   <p>Hello</p>
+</div>
+```
+
+### Les directives: *ngFor
+
+Un component auquel on ajoute la directive ```*ngFor="let obj of myArray"``` itérera l'array ```myArray``` et affichera un component par objet ```obj```, comme un ```for``` classique.
+
+```typescript
+export class AppComponent {
+
+  infoArray = [
+    {
+      phrase: 'LOL'
+    },
+    {
+      phrase: 'DOMO'
+    },
+    {
+      phrase: 'PTDR'
+    }
+  ];
+
+  constructor() {}
+}
+```
+
+```html
+<div *ngFor="let info of infoArray">
+   <p>{{info.phrase}}</p>
+</div>
+```
+
+## Pipes
+
+Les pipes prennent des données en input, les transforment, et puis affichent les données modifiées dans le DOM.
+
+Il y a des pipes fournis avec Angular, et vous pouvez également créer vos propres pipes si vous en avez besoin.
+
+### Pipes: date
+
+Un pipe que l'on utilise très souvent est DatePipe , qui analyse des objets JS de type Date et qui les affiche d'une manière plus lisible que leur encodage de base.
+
+Pour ajouter le DatePipe dans le template il suffit de mettre le caractère ```|```.
+
+```typescript
+export class AppComponent {
+  lastUpdate = new Date();
+
+  constructor() {}
+}
+```
+
+```html
+<p>Mis à jour : {{ lastUpdate | date }}</p>
+<p>Mis à jour : {{ lastUpdate | date: 'short' }}</p>
+<p>Mis à jour : {{ lastUpdate | date: 'yMMMMEEEEd' }}</p>
+```
