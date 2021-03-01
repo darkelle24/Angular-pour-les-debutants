@@ -1,0 +1,7 @@
+<h2>{{enterpriseName}}</h2>
+
+<div *ngFor="let jeu of list">
+    <button (click)="showJeu(jeu)"> Show {{jeu.nom}}</button>
+</div>
+
+<app-jeu-video *ngIf="hideJeu" [jeuVideo]="jeuSelect"></app-jeu-video>
