@@ -74,3 +74,153 @@ Vous trouverez l'implémentation du shell AppComponent réparti sur trois fichie
 - app.component.ts - le code du component, écrit en TypeScript.
 - app.component.html - le modèle de component, écrit en HTML.
 - app.component.css: styles CSS privés du component.
+
+## Afficher une variable
+
+Pour afficher une variable sur le site web. Il suffit de taper ```{{ leNomDeLaVariable }}``` entre les balises d'un code html. Ex: ```<h1>{{title}}</h1>``` va afficher le contenu de la variable title.
+
+## Créez un component
+
+Pour créer un nouveau component à l'aide du CLI d'Angular. Vous-devez depuis le dossier principal de votre projet, executez la commande suivante :
+
+```sh
+ng generate component leNomDuComponent
+```
+
+## Affichez un component
+
+Il suffit de trouver le nom de la balise associer a votre component.
+Pour la trouver allez dans le .ts du component que vous avez créez.
+
+```typescript
+@Component({
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css']
+})
+```
+
+Le nom de la balise se trouve dans le selector.
+Ex: ```<app-heroes></app-heroes>``` affichera le component heroes.
+
+## Créez une interface
+
+Cela marche de la meme facon que les autres languages objets.
+Pour créez une interface il suffit de taper :
+
+```typescript
+export interface leNomDeLInterface {}
+```
+
+Ex:
+
+```typescript
+export interface Hero {
+  id: number;
+  name: string;
+}
+```
+
+## Property binding
+
+La liaison par propriété ou "property binding" est une autre façon de créer de la communication dynamique entre votre TypeScript et votre template : plutôt qu'afficher simplement le contenu d'une variable, vous pouvez modifier dynamiquement les propriétés d'un élément du DOM en fonction de données dans votre TypeScript.
+
+Afin de lier cette propriété au TypeScript, il faut le mettre entre crochets ```[]``` et l'associer à la variable ainsi :
+
+```typescript
+export class AppComponent {
+  isAuth: boolean = false;
+}
+```
+
+```html
+<button [disabled]="!isAuth">Show</button>
+```
+
+## Event binding
+
+Je vais vous montrer comment réagir dans votre code TypeScript aux événements venant du template HTML grace aux Event binding. on utilise les parenthèses ```()``` pour créer une liaison à un événement.
+
+```typescript
+click() {
+    console.log('Button is pressed!');
+}
+```
+
+```html
+<button [disabled]="!isAuth"
+        (click)="click()">Show</button>
+```
+
+## Two-way binding
+
+La liaison à double sens (ou two-way binding) utilise la liaison par propriété et la liaison par événement en même temps.
+
+On l'utilise, par exemple, pour les formulaires, afin de pouvoir déclarer et de récupérer le contenu des champs. Il vous faut importer ```FormsModule``` depuis ```@angular/forms``` dans le fichier AppModule et l'ajoutez à l'array  imports.
+
+```typescript
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+
+import { FormsModule } from '@angular/forms';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: []
+})
+export class AppModule { }
+```
+
+Pour utilisez le two-way binding il suffit de mettre des crochets et des parenthèses ```[()]```
+
+```typescript
+export class AppComponent {
+  name: string = '';
+}
+```
+
+```html
+<input type="text" class="form-control" [(ngModel)]="name">
+```
+
+## Propriétés personnalisées
+
+Il est possible de créer des propriétés personnalisées dans un component afin de pouvoir lui transmettre des données depuis l'extérieur, par exemple passer des données d'un component Parent à celui d'un component Enfant.
+
+Pour ce faire, il faut utiliser le décorateur ```@Input()``` en remplaçant la déclaration de la variable.
+Ex:
+
+```typescript
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.scss']
+})
+export class HeroesComponent {
+
+  @Input() heroesName: string;
+
+  constructor() { }
+}
+```
+
+Ce décorateur, en effet, crée une propriété ```heroesName``` qu'on peut fixer depuis la balise  ```<app-heroes>``` :
+
+```html
+<app-heroes heroesName="Superman"></app-heroes>
+<app-heroes heroesName="Spiderman"></app-heroes>
+<app-heroes heroesName="Hulk"></app-heroes>
+```
+
+## Les directives: *ngIf
+
+
