@@ -137,12 +137,12 @@ Afin de lier cette propriété au TypeScript, il faut le mettre entre crochets `
 export class AppComponent {
    constructor() { }
 
-   isAuth: boolean = false;
+   block: boolean = false;
 }
 ```
 
 ```html
-<button [disabled]="!isAuth">Show</button>
+<button [disabled]="block">Show</button>
 ```
 
 ## Event binding
@@ -160,8 +160,7 @@ export class AppComponent {
 ```
 
 ```html
-<button [disabled]="!isAuth"
-        (click)="click()">Show</button>
+<button (click)="click()">Show</button>
 ```
 
 ## Two-way binding
