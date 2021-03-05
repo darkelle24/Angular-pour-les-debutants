@@ -574,3 +574,43 @@ Un opérateur est une fonction qui se place entre l'Observable et l'Observer (la
 
 - ```scan()``` et ```reduce()``` : permettent d'exécuter une fonction qui réunit l'ensemble des valeurs reçues selon une fonction que vous lui passez — par exemple, vous pouvez faire la somme de toutes les valeurs reçues. La différence basique entre les deux opérateurs : ```reduce()``` vous retourne uniquement la valeur finale, alors que ```scan()``` retourne chaque étape du calcul.
 
+## HTTP Client
+
+Angular met à disposition un service appelé ```HttpClient``` qui permet de créer et d'exécuter des appels HTTP (fait par AJAX - Asynchronous JavaScript and XML) et de réagir aux informations retournées par le serveur.
+
+Pour avoir accès au service ```HttpClient```, il faut tout d'abord ajouter ```HttpClientModule```, importé depuis ```@angular/common/http```, à votre ```AppModule```.
+
+```typescript
+imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
+],
+```
+
+Injecter dans un service le module ```HttpClient```, en y ayant auparavant ajouté le décorateur ```@Injectable()```.
+
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
+export class GameService {
+  constructor(private httpClient: HttpClient) { }
+
+  getAllGames() {
+    this.httpClient
+      .get('https://localhost:4200/games')
+      .subscribe(
+        data => {
+          console.log(data)
+        }
+        error => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+  }
+}
+```
