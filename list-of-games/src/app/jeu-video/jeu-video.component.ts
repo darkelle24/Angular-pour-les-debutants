@@ -1,5 +1,8 @@
+import { JeuService } from './../_services/jeu.service';
 import { JeuVideo } from './../_models/jeu-video';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-jeu-video',
@@ -8,9 +11,19 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class JeuVideoComponent implements OnInit {
 
-  @Input() jeuVideo: JeuVideo | null;
+  jeuVideo: JeuVideo | null = null;
 
-  constructor() { }
+  idOfJeu = 0
+
+  constructor(private jeu: JeuService, private route: ActivatedRoute) {
+    this.route.paramMap.subscribe(
+      data => {
+        console.log(data)
+        this.idOfJeu = parseInt(data.get('id'))
+        this.jeuVideo = this.jeu.getOneGame(this.idOfJeu)
+      }
+    );
+  }
 
   ngOnInit(): void {
   }

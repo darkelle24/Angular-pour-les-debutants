@@ -1,6 +1,7 @@
+import { JeuService } from './../_services/jeu.service';
 import { JeuVideo } from './../_models/jeu-video';
-import { LIST } from './../list';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-jeu-video',
@@ -12,22 +13,18 @@ export class ListJeuVideoComponent implements OnInit {
   @Input() enterpriseName: string = 'Blizzard';
 
   hideJeu = false
-  jeuSelect = null
 
-  list = LIST
+  list = []
 
-  constructor() { }
+  constructor(private jeu: JeuService, private router: Router) {}
 
   ngOnInit(): void {
+    this.list = this.jeu.LIST
   }
 
   showJeu(jeu: JeuVideo) {
-    if (!(this.hideJeu && this.jeuSelect === jeu)) {
-      this.hideJeu = true
-      this.jeuSelect = jeu
-    } else {
-      this.hideJeu = false
-    }
+    this.hideJeu = true
+    this.router.navigate(['jeu', jeu.id]);
   }
 
 }

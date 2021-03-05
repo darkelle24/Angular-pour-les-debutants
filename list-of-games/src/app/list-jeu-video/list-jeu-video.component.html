@@ -4,5 +4,6 @@
         <mat-list-item> <button mat-raised-button color="primary" (click)="showJeu(jeu)"> Show {{jeu.nom}}</button> </mat-list-item>
     </mat-list>
 
-    <app-jeu-video *ngIf="hideJeu" [jeuVideo]="jeuSelect"></app-jeu-video>
+    <router-outlet></router-outlet>
+    <!-- <app-jeu-video *ngIf="hideJeu" [jeuVideo]="jeuSelect"></app-jeu-video> -->
 </div>

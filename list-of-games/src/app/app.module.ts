@@ -11,12 +11,16 @@ import { AppComponent } from './app.component';
 import { JeuVideoComponent } from './jeu-video/jeu-video.component';
 import { ListJeuVideoComponent } from './list-jeu-video/list-jeu-video.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JeuVideoComponent,
-    ListJeuVideoComponent
+    ListJeuVideoComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
