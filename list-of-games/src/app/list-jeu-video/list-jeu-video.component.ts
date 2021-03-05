@@ -22,8 +22,12 @@ export class ListJeuVideoComponent implements OnInit {
   }
 
   showJeu(jeu: JeuVideo) {
-    this.hideJeu = true
-    this.jeuSelect = jeu
+    if (!(this.hideJeu && this.jeuSelect === jeu)) {
+      this.hideJeu = true
+      this.jeuSelect = jeu
+    } else {
+      this.hideJeu = false
+    }
   }
 
 }

@@ -1,5 +1,16 @@
-<p>{{jeuVideo.id}}</p>
-<p>{{jeuVideo.nom | uppercase}}</p>
-<p>{{jeuVideo.note}}</p>
-<input [(ngModel)]="jeuVideo.nom">
-<input [(ngModel)]="jeuVideo.note">
+<div class="mat-elevation-z8" style="width: 15%;padding: 2%; margin: auto;">
+    <h2>Jeu video Info</h2>
+    <p>Id: {{jeuVideo.id}}</p>
+    <p>Nom: {{jeuVideo.nom | uppercase}}</p>
+    <p>Note: {{jeuVideo.note}}</p>
+
+    <mat-form-field style="margin-right: 1%;">
+        <mat-label>Nom de jeu vidéo</mat-label>
+        <input matInput placeholder="Nom" [(ngModel)]="jeuVideo.nom">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Note du jeu vidéo</mat-label>
+        <input matInput placeholder="Note" type="number" [(ngModel)]="jeuVideo.note">
+    </mat-form-field>
+</div>

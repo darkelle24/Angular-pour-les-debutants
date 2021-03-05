@@ -1,7 +1,8 @@
-<h2>{{enterpriseName}}</h2>
+<div class="mat-elevation-z8" style="padding: 2%; margin: auto;width:95%">
+    <h2>Liste Jeu video</h2>
+    <mat-list *ngFor="let jeu of list">
+        <mat-list-item> <button mat-raised-button color="primary" (click)="showJeu(jeu)"> Show {{jeu.nom}}</button> </mat-list-item>
+    </mat-list>
 
-<div *ngFor="let jeu of list">
-    <button (click)="showJeu(jeu)"> Show {{jeu.nom}}</button>
+    <app-jeu-video *ngIf="hideJeu" [jeuVideo]="jeuSelect"></app-jeu-video>
 </div>
-
-<app-jeu-video *ngIf="hideJeu" [jeuVideo]="jeuSelect"></app-jeu-video>
