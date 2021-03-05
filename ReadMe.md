@@ -508,3 +508,69 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: 'not-found' }
 ];
 ```
+
+## Observables
+
+Pour réagir à des événements ou à des données de manière asynchrone (c'est-à-dire ne pas devoir attendre qu'une tâche, par exemple un appel HTTP, soit terminée avant de passer à la ligne de code suivante), il y a eu plusieurs méthodes depuis quelques années.
+
+Il y a le système de callback, par exemple, ou encore les Promise. Avec l'API RxJS, fourni et très intégré dans Angular, la méthode proposée est celle des Observables.
+
+Un Observable est un objet qui émet des informations auxquelles on souhaite réagir.  Ces informations peuvent venir d'un champ de texte dans lequel l'utilisateur rentre des données, ou de la progression d'un chargement de fichier, par exemple. Elles peuvent également venir de la communication avec un serveur.
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+
+  secondes: number;
+
+  ngOnInit() {
+    const counter = Observable.interval(1000);
+    counter.subscribe(
+      (value) => {
+        this.secondes = value;
+      },
+      (error) => {
+        console.log('Uh-oh, an error occurred! : ' + error);
+      },
+      () => {
+        console.log('Observable complete!');
+      }
+    );
+  }
+}
+```
+
+### Subscriptions
+
+La fonction ```subscribe()``` prend comme arguments trois fonctions anonymes :
+
+- La première se déclenche à chaque fois que l'Observable émet de nouvelles données, et reçoit ces données comme argument
+- La deuxième se déclenche si l'Observable émet une erreur, et reçoit cette erreur comme argument
+- La troisième se déclenche si l'Observable s'achève, et ne reçoit pas d'argument
+
+Afin d'éviter tout problème, quand vous utilisez des Observables personnalisés, il est vivement conseillé de stocker la souscription dans un objet Subscription et de ```unsubscribe()``` apres dans ngOnDestroy().
+
+Tips: Le module HTTP d'Angular ```unsubscribe()``` automatiquement a chaque fin de request.
+
+### Subjects
+
+### Opérateurs
+
+Un opérateur est une fonction qui se place entre l'Observable et l'Observer (la Subscription, par exemple), et qui peut filtrer et/ou modifier les données reçues avant même qu'elles n'arrivent à la Subscription.  Voici quelques exemples rapides :
+
+- ```map()``` : modifie les valeurs reçues — peut effectuer des calculs sur des chiffres, transformer du texte, créer des objets…
+
+- ```filter()``` : comme son nom l'indique, filtre les valeurs reçues selon la fonction qu'on lui passe en argument.
+
+- ```throttleTime()``` : impose un délai minimum entre deux valeurs — par exemple, si un Observable émet cinq valeurs par seconde, mais ce sont uniquement les valeurs reçues toutes les secondes qui vous intéressent, vous pouvez passer ```throttleTime(1000)``` comme opérateur.
+
+- ```scan()``` et ```reduce()``` : permettent d'exécuter une fonction qui réunit l'ensemble des valeurs reçues selon une fonction que vous lui passez — par exemple, vous pouvez faire la somme de toutes les valeurs reçues. La différence basique entre les deux opérateurs : ```reduce()``` vous retourne uniquement la valeur finale, alors que ```scan()``` retourne chaque étape du calcul.
+
